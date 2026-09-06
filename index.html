@@ -450,6 +450,19 @@
     });
   }
 </script>
-
+<script>
+  fetch('https://api.github.com/repos/misbahsabeen75-cell/AhmedBhai/contents/content/ids')
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(file => {
+        fetch(file.download_url)
+          .then(res => res.text())
+          .then(content => {
+            console.log("Loaded ID content:", content);
+          });
+      });
+    });
+</script>
+ 
 </body>
 </html>
