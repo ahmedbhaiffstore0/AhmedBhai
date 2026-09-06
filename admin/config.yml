@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: ahmedbhaiffstore/AhmedBhai
   branch: main
+  
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
