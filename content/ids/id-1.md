@@ -8,7 +8,7 @@ original_price: 7,500
 details: |-
   ✅ 250+ LOADED 
   ✅ 40 LUSH EMOTES
-  ✅ 3 ENTRY + 7 EVO GUNS
+  ✅ 3 ENTRY
 whatsapp_num: "923132478759"
 buy_text: Mujhe RARE ID LENI HAI
 ---
