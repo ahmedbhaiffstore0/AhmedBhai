@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ahmedbhaiffstore/AhmedBhai
+  repo: ahmedbhaiffstore0/AhmedBhai
   branch: main
   base_url: https://ahmedbhaiffstore0.github.io
   
