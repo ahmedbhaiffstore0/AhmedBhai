@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: ahmedbhaiffstore0/ahmedbhaiffstore0.github.io
+  name: git-gateway
   branch: main
-  base_url: https://ahmedbhaiffstore0.github.io
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
