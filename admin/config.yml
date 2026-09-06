@@ -12,9 +12,13 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Level", name: "level", widget: "string"}
-      - {label: "Price", name: "price", widget: "string"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "ID Title / Heading", name: "title", widget: "string", default: "RARE ID"}
+      - {label: "Level Tag (e.g. Lv. 65)", name: "level", widget: "string", required: false}
+      - {label: "Image Size Style", name: "img_size", widget: "select", options: ["nom", "tall", "bag", "big"], default: "nom"}
+      - {label: "ID Screenshot Image", name: "image", widget: "image"}
+      - {label: "Selling Price (Rs.)", name: "price", widget: "string", default: "6,000"}
+      - {label: "Original Cut Price (Rs.)", name: "original_price", widget: "string", required: false, default: "7,500"}
+      - {label: "Details / Features (Write each line starting with ✅)", name: "details", widget: "text", default: "✅ 250+ LOADED VAULT\n✅ 40 LUSH EMOTES"}
+      - {label: "WhatsApp Phone Number (e.g. 923132478759)", name: "whatsapp_num", widget: "string", default: "923132478759"}
+      - {label: "Custom Buy Message Text", name: "buy_text", widget: "string", default: "Mujhe ID Buy Krni Hai"}
       
