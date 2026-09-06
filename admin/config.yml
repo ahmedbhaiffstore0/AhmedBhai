@@ -3,6 +3,7 @@ backend:
   repo: ahmedbhaiffstore0/AhmedBhai
   branch: main
   base_url: https://ahmedbhaiffstore0.github.io
+  auth_type: implicit
   
 
 media_folder: "images/uploads"
