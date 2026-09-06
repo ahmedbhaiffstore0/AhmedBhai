@@ -1,9 +1,10 @@
 backend:
   name: github
-  repo: ahmedbhaiffstore0/AhmedBhai
+  repo: ahmedbhaiffstore0/ahmedbhaiffstore0.github.io
   branch: main
   base_url: https://ahmedbhaiffstore0.github.io
   auth_type: implicit
+  
   
 
 media_folder: "images/uploads"
