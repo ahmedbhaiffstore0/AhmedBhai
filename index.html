@@ -451,46 +451,62 @@
   }
 </script>
 <script>
-  // GitHub API se Netlify CMS content fetch karke site par cards render karne ka code
-  const container = document.querySelector('.available-ids-container') || document.querySelector('main') || document.body;
+  // Admin Panel (Decap CMS) se IDs fetch karke website design ke mutabiq render karne ka code
+  const cardsContainer = document.querySelector('.cards');
 
-  fetch('https://api.github.com/repos/misbahsabeen75-cell/AhmedBhai/contents/content/ids')
-    .then(res => res.json())
-    .then(data => {
-      if (!Array.isArray(data)) return;
-      data.forEach(file => {
-        fetch(file.download_url)
-          .then(res => res.text())
-          .then(content => {
-            // Frontmatter Parser (Title, Price, Level, Image nikalne ke liye)
-            const titleMatch = content.match(/title:\s*"(.*?)"|title:\s*(.*)/);
-            const priceMatch = content.match(/price:\s*"(.*?)"|price:\s*(.*)/);
-            const levelMatch = content.match(/level:\s*"(.*?)"|level:\s*(.*)/);
-            const imageMatch = content.match(/image:\s*"(.*?)"|image:\s*(.*)/);
+  if (cardsContainer) {
+    fetch('https://api.github.com/repos/misbahsabeen75-cell/AhmedBhai/contents/content/ids')
+      .then(res => res.json())
+      .then(files => {
+        if (!Array.isArray(files)) return;
+        
+        files.forEach(file => {
+          fetch(file.download_url)
+            .then(res => res.text())
+            .then(content => {
+              // Extract fields from Markdown frontmatter
+              const getField = (fieldName) => {
+                const match = content.match(new RegExp(`${fieldName}:\\s*"(.*?)"|${fieldName}:\\s*(.*)`));
+                return match ? (match[1] || match[2] || '').trim() : '';
+              };
 
-            const title = titleMatch ? (titleMatch[1] || titleMatch[2]) : 'Free Fire ID';
-            const price = priceMatch ? (priceMatch[1] || priceMatch[2]) : 'Contact for Price';
-            const level = levelMatch ? (levelMatch[1] || levelMatch[2]) : '';
-            const image = imageMatch ? (imageMatch[1] || imageMatch[2]) : '';
+              const title = getField('title') || 'Free Fire ID';
+              const level = getField('level');
+              const imgSize = getField('img_size') || 'nom';
+              const image = getField('image');
+              const price = getField('price') || '0';
+              const originalPrice = getField('original_price');
+              const details = getField('details');
+              const waNum = getField('whatsapp_num') || '923132478759';
+              const buyText = getField('buy_text') || 'Mujhe ID buy karni hai';
 
-            // Card HTML Generate karein
-            const cardHtml = `
-              <div class="id-card" style="border:1px solid #ff5500; margin:15px; padding:15px; border-radius:10px; background:#111; color:#fff;">
-                ${image ? `<img src="${image}" style="width:100%; border-radius:8px; margin-bottom:10px;">` : ''}
-                <h3 style="color:#ff5500;">${title}</h3>
-                ${level ? `<p><strong>Level:</strong> ${level}</p>` : ''}
-                <p style="font-size:18px; font-weight:bold; color:#00ff88;">Rs. ${price}</p>
-                <a href="https://wa.me/923403782084?text=I%20want%20to%20buy%20${encodeURIComponent(title)}" 
-                   style="display:inline-block; background:#ff5500; color:#fff; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold; margin-top:10px;">
-                   BUY NOW ⚡
-                </a>
-              </div>
-            `;
-            container.insertAdjacentHTML('beforeend', cardHtml);
-          });
-      });
-    })
-    .catch(err => console.error("CMS Fetch Error:", err));
+              // Format Details (New lines to <br>)
+              const formattedDetails = details ? details.replace(/\\n|\n/g, '<br>') : '';
+              const origPriceHtml = originalPrice ? `<small>Rs. ${originalPrice}</small>` : '';
+              const encodedWaText = encodeURIComponent(buyText);
+
+              // Render Card HTML (Exact matching original design)
+              const cardHtml = `
+                <div class="card">
+                  <div class="card-img ${imgSize}">
+                    ${image ? `<img src="${image}" alt="${title}" loading="lazy">` : ''}
+                    ${level ? `<span class="level">${level}</span>` : ''}
+                  </div>
+                  <div class="card-body">
+                    <h3>${title}</h3>
+                    <div class="details">${formattedDetails}</div>
+                    <div class="price">Rs. ${price} ${origPriceHtml}</div>
+                    <a class="buy-btn" href="https://wa.me/${waNum}?text=${encodedWaText}" aria-label="Buy via WhatsApp">BUY NOW ⚡</a>
+                  </div>
+                </div>
+              `;
+
+              cardsContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        });
+      })
+      .catch(err => console.error("Error fetching CMS IDs:", err));
+  }
 </script>
 </body>
 </html>
