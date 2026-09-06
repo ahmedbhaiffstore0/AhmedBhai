@@ -380,10 +380,10 @@
   // Admin Panel (Decap CMS) se IDs fetch karke website design ke mutabiq render karne ka code
   const cardsContainer = document.querySelector('.cards');
 
-  if (cardsContainer) {
-    fetch('https://api.github.com/repos/misbahsabeen75-cell/AhmedBhai/contents/content/ids')
-      .then(res => res.json())
-      .then(files => {
+          if (cardsContainer) {
+            fetch('https://api.github.com/repos/ahmedbhaiffstore0/ahmedbhaiffstore0.github.io/contents/content/ids')
+                .then(res => res.json())
+                .then(files => {
         if (!Array.isArray(files)) return;
         
         files.forEach(file => {
